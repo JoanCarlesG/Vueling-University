@@ -3,10 +3,9 @@
 let sentence = "This is a sample sentence";
 
 function longestWord(sentence){
-    wordArray = sentence.split(" ");
     
-    sortedArray = wordArray.sort((a, b) => (b.length - a.length));
-    
+    let wordArray = sentence.split(" ");
+    let sortedArray = wordArray.sort((a, b) => (b.length - a.length));
     return sortedArray[0];
 }
 
