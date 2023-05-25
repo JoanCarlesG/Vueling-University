@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "7bed0cfb-2af1-4c58-be53-ef707b872148",
+		"name": "PokeAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27570617"
+	},
+	"item": [
+		{
+			"name": "Pokémon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"validateOK200(pm);\r",
+							"\r",
+							"let body = JSON.parse(responseBody);\r",
+							"\r",
+							"let name = body.forms[0].name;\r",
+							"\r",
+							"console.log(name);\r",
+							"\r",
+							"validateName (pm, nameParam);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}{{endpoint}}pikachu",
+					"host": [
+						"{{url}}{{endpoint}}pikachu"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"validateOK200 = function (pm) {",
+					"     pm.test(\"Status code is 200\", function () {",
+					"          pm.response.to.have.status(200); ",
+					"          }); ",
+					"    }",
+					"",
+					"validateName = function(pm, nameParam){",
+					"pm.test(\"Name is correct\", function () {",
+					"    pm.expect(name).to.equal(pm.response.)",
+					"    });",
+					"}"
+				]
+			}
+		}
+	]
+}
