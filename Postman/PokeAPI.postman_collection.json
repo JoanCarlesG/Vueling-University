@@ -16,12 +16,12 @@
 							"validateOK200(pm);\r",
 							"\r",
 							"let body = JSON.parse(responseBody);\r",
-							"\r",
 							"let name = body.forms[0].name;\r",
 							"\r",
-							"console.log(name);\r",
+							"let requestUrl = pm.request.url;\r",
+							"let nameParam = requestUrl.path[3];\r",
 							"\r",
-							"validateName (pm, nameParam);"
+							"validatePokemon(pm, name, nameParam);"
 						],
 						"type": "text/javascript"
 					}
@@ -65,16 +65,17 @@
 				"type": "text/javascript",
 				"exec": [
 					"validateOK200 = function (pm) {",
-					"     pm.test(\"Status code is 200\", function () {",
-					"          pm.response.to.have.status(200); ",
-					"          }); ",
-					"    }",
+					"    pm.test(\"Status code is 200\", function () {",
+					"        pm.response.to.have.status(200); ",
+					"    }); ",
+					"}",
 					"",
-					"validateName = function(pm, nameParam){",
-					"pm.test(\"Name is correct\", function () {",
-					"    pm.expect(name).to.equal(pm.response.)",
+					"validatePokemon = function (pm, name, nameParam) {",
+					"    pm.test(\"Pokemon is correct\", function () {",
+					"        pm.expect(nameParam).to.equal(name);",
 					"    });",
-					"}"
+					"}",
+					""
 				]
 			}
 		}
