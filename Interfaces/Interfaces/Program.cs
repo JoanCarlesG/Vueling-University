@@ -19,11 +19,11 @@ namespace MyFirstProgram
 
             rabbit.Name = "Bugs Bunny";
             rabbit.Flee();
+            Console.WriteLine(rabbit.eaten);
             hawk.Hunt();
             fish.Flee();
             fish.Hunt();
 
-            Console.ReadKey();
         }
         
 
@@ -43,6 +43,9 @@ namespace MyFirstProgram
                 get;
                 set;
             }
+
+            //Constantes
+            const bool eaten = true;
         }
         interface IPredator
         {
@@ -63,12 +66,16 @@ namespace MyFirstProgram
                 Console.WriteLine("{0} runs away!",this.Name);
             }
 
+            //Propiedades
             private string _name; //atributo
             public string Name  //propiedad modificable
             {
                 get => _name;
                 set => _name = value;
             }
+
+            //Acceso a constantes
+            public bool eaten = IPrey.eaten;
         }
         class Hawk : IPredator
         {
