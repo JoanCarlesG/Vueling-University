@@ -7,19 +7,259 @@
 	},
 	"item": [
 		{
-			"name": "Pokémon",
+			"name": "Pokémon más rápido",
+			"item": [
+				{
+					"name": "Get Pokémon count",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"let pokemonArray = Array.from(Array(response.count).keys())\r",
+									"pokemonArray.shift();\r",
+									"pokemonArray.splice(1010);\r",
+									"\r",
+									"//only pokemon from 1 to 1010, others until 1281 are forms with special IDs.\r",
+									"\r",
+									"pm.environment.set(\"totalPokemon\", pokemonArray);\r",
+									"pm.environment.set(\"maxSpeed\", 0);\r",
+									"pm.environment.set(\"maxSpeedPokemon\", \"\");\r",
+									"\r",
+									"console.log(pokemonArray);\r",
+									"\r",
+									"postman.setNextRequest(\"Get 1 Pokémon\");\r",
+									"\r",
+									"pm.test(\"Pokémon count is 1010\", () => {\r",
+									"    pm.expect(pokemonArray.length).to.be.equal(1010);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Gets data as array\", () =>{\r",
+									"    pm.expect(pokemonArray).to.be.an('Array');\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}pokemon",
+							"host": [
+								"{{url}}pokemon"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get 1 Pokémon",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"let maxSpeed = pm.environment.get(\"maxSpeed\");\r",
+									"let maxSpeedPokemon = pm.environment.get(\"maxSpeedPokemon\");\r",
+									"let currentSpeed = response.stats[5].base_stat;\r",
+									"let currentName = response.name;\r",
+									"\r",
+									"if (maxSpeed < currentSpeed){\r",
+									"    pm.environment.set(\"maxSpeed\", currentSpeed);\r",
+									"    pm.environment.set(\"maxSpeedPokemon\", currentName);\r",
+									"}\r",
+									"\r",
+									"validateOK200(pm);\r",
+									"pm.test(\"Has a speed stat\", () => {\r",
+									"    pm.expect(response.stats[5].base_stat).to.exist;\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const pokemonIds = pm.environment.get(\"totalPokemon\");\r",
+									"const currentId = pokemonIds.shift();\r",
+									"\r",
+									"pm.variables.set(\"currentId\", currentId);\r",
+									"\r",
+									"if (pokemonIds.length > 0) {\r",
+									"    pm.environment.set(\"totalPokemon\", pokemonIds);\r",
+									"    postman.setNextRequest(\"Get 1 Pokémon\");\r",
+									"} else {\r",
+									"    postman.setNextRequest(null);\r",
+									"    console.log(pm.environment.get(\"maxSpeed\"));\r",
+									"    console.log(pm.environment.get(\"maxSpeedPokemon\"));\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}pokemon/{{currentId}}",
+							"host": [
+								"{{url}}pokemon"
+							],
+							"path": [
+								"{{currentId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pokémon de Kanto con hab oculta",
+			"item": [
+				{
+					"name": "Get Pokémon de Kanto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"let kantoPokemon = [];\r",
+									"for(i = 0; i < response.pokemon_species.length; i++){\r",
+									"    kantoPokemon.push(response.pokemon_species[i].name)\r",
+									"}\r",
+									"\r",
+									"pm.environment.set(\"kantoPokemon\", kantoPokemon);\r",
+									"console.log(kantoPokemon);\r",
+									"postman.setNextRequest(\"Comprobar cada hab oculta\");\r",
+									"\r",
+									"pm.test(\"Region is Kanto\", () => {\r",
+									"    pm.expect(response.main_region.name).to.be.equal(\"kanto\");\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Number of Pokémon is 151\", () =>{\r",
+									"    pm.expect(response.pokemon_species.length).to.be.equal(151);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}generation/1/",
+							"host": [
+								"{{url}}generation"
+							],
+							"path": [
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comprobar cada hab oculta",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const kantoPokemon = pm.environment.get(\"kantoPokemon\");\r",
+									"const currentName = kantoPokemon.shift();\r",
+									"\r",
+									"pm.variables.set(\"currentName\", currentName);\r",
+									"\r",
+									"if (kantoPokemon.length > 0) {\r",
+									"    pm.environment.set(\"kantoPokemon\", kantoPokemon);\r",
+									"    postman.setNextRequest(\"Comprobar cada hab oculta\");\r",
+									"} else {\r",
+									"    postman.setNextRequest(null);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"validateOK200(pm);\r",
+									"let name = response.name;\r",
+									"let requestUrl = pm.request.url;\r",
+									"let nameParam = requestUrl.path[3];\r",
+									"\r",
+									"validatePokemon(pm, name, nameParam);\r",
+									"let hiddenAbility = false;\r",
+									"\r",
+									"pm.test(\"Has hidden ability\", () => {\r",
+									"    for(i = 0; i < response.abilities.length; i++){\r",
+									"        if (response.abilities[i].is_hidden){\r",
+									"            hiddenAbility = true;\r",
+									"        }\r",
+									"    }\r",
+									"    pm.expect(hiddenAbility).to.be.true;\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}pokemon/{{currentName}}",
+							"host": [
+								"{{url}}pokemon"
+							],
+							"path": [
+								"{{currentName}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "1 Pokémon",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"validateOK200(pm);\r",
-							"\r",
 							"let body = JSON.parse(responseBody);\r",
 							"let name = body.forms[0].name;\r",
-							"\r",
 							"let requestUrl = pm.request.url;\r",
 							"let nameParam = requestUrl.path[3];\r",
+							"\r",
+							"validateOK200(pm);\r",
 							"\r",
 							"validatePokemon(pm, name, nameParam);"
 						],
@@ -40,9 +280,236 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}{{endpoint}}pikachu",
+					"raw": "{{url}}pokemon/bulbasaur",
 					"host": [
-						"{{url}}{{endpoint}}pikachu"
+						"{{url}}pokemon"
+					],
+					"path": [
+						"bulbasaur"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comprobar movimiento",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"validateMove = function (pm, moveName, nameParam) {\r",
+							"    pm.test(\"Move name is \" + moveName, function () {\r",
+							"        pm.expect(moveName).to.equal(nameParam); \r",
+							"    }); \r",
+							"}\r",
+							"\r",
+							"validateTypePsychic = function (pm, moveType) {\r",
+							"    pm.test(\"Move type is \" + moveType, function () {\r",
+							"        pm.expect(moveType).to.equal(\"psychic\"); \r",
+							"    });  \r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let body = JSON.parse(responseBody);\r",
+							"let moveName = body.name;\r",
+							"let moveType = body.type.name;\r",
+							"\r",
+							"let requestUrl = pm.request.url;\r",
+							"let nameParam = requestUrl.path[3];\r",
+							"\r",
+							"validateOK200(pm);\r",
+							"\r",
+							"validateMove(pm, moveName, nameParam);\r",
+							"\r",
+							"validateTypePsychic(pm, moveType);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}move/rest",
+					"host": [
+						"{{url}}move"
+					],
+					"path": [
+						"rest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comprobar habilidad",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"validateAbility = function (pm, abilityName) {\r",
+							"    pm.test(\"Ability name is \" + abilityName, function () {\r",
+							"        pm.expect(abilityName).to.equal(\"truant\"); \r",
+							"    }); \r",
+							"}\r",
+							"\r",
+							"pokemonAbility = function (pm, abilityName, body) {\r",
+							"    pm.test(\"Slaking has the \" + abilityName + \" ability\", function () {\r",
+							"        for(i = 0; i < body.pokemon.length; i++){\r",
+							"            let pokemonName = body.pokemon[i].pokemon.name;\r",
+							"            if (pokemonName == \"slaking\"){\r",
+							"                pm.expect(\"slaking\").to.equal(pokemonName);\r",
+							"            }\r",
+							"        }\r",
+							"    })\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let body = JSON.parse(responseBody);\r",
+							"let abilityName = body.name;\r",
+							"validateOK200(pm);\r",
+							"validateAbility(pm, abilityName);\r",
+							"pokemonAbility(pm, abilityName, body);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}ability/truant",
+					"host": [
+						"{{url}}ability"
+					],
+					"path": [
+						"truant"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista movimientos de un pokémon",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"validateMovesTotal = function (pm, pokemonName, movesTotal) {\r",
+							"    pm.test(pokemonName + \" has \" + movesTotal + \" possible moves\", function () {\r",
+							"        pm.expect(movesTotal).to.equal(117)\r",
+							"    })\r",
+							"}\r",
+							"\r",
+							"lessThan150 = function (pm, pokemonName, movesTotal) {\r",
+							"    pm.test(pokemonName + \" has less than 150 moves\", function () {\r",
+							"        pm.expect(movesTotal).to.be.below(150);\r",
+							"    })\r",
+							"}\r",
+							"\r",
+							"moreThan50 = function (pm, pokemonName, movesTotal) {\r",
+							"    pm.test(pokemonName + \" has more than 50 moves\", function () {\r",
+							"        pm.expect(movesTotal).to.be.above(50);\r",
+							"    })\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let movesTotal = JSON.parse(responseBody).moves.length;\r",
+							"let pokemonName = JSON.parse(responseBody).name;\r",
+							"\r",
+							"console.log(movesTotal);\r",
+							"\r",
+							"validateOK200(pm);\r",
+							"validateMovesTotal(pm, pokemonName, movesTotal);\r",
+							"lessThan150(pm, pokemonName, movesTotal);\r",
+							"moreThan50(pm, pokemonName, movesTotal);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}pokemon/slaking",
+					"host": [
+						"{{url}}pokemon"
+					],
+					"path": [
+						"slaking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Todos los tipos tienen como mínimo 50 pokémon asociados",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let body = JSON.parse(responseBody);\r",
+							"validateOK200(pm);\r",
+							"pm.test(\"All Types have 50 pokémon associated\", getAllTypes(body));\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"getAllTypes = function (Json) {\r",
+							"    for (let i = 0; i < Json.results.length; i++) {\r",
+							"        let typeURL = pm.environment.get(\"url\") + 'type/' + i;\r",
+							"        pm.sendRequest({ method: 'GET', url: typeURL }, function (err, response) {\r",
+							"            if (err) {\r",
+							"                console.error(err);\r",
+							"            } else {\r",
+							"                const responseBody = response.json();\r",
+							"                pm.expect(responseBody.pokemon.length).to.be.greaterThan(50);\r",
+							"            }\r",
+							"        });\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}type",
+					"host": [
+						"{{url}}type"
 					]
 				}
 			},
@@ -78,6 +545,12 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "totalPokemon",
+			"value": ""
 		}
 	]
 }
