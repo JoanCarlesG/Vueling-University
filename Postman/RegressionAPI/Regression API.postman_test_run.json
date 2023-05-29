@@ -1,0 +1,776 @@
+{
+	"id": "c68aa7bd-bee3-448c-83cc-7807e6c59bd5",
+	"name": "Regression API",
+	"timestamp": "2023-05-29T17:59:29.246Z",
+	"collection_id": "27570617-57c686e0-ab21-4fbd-9d94-1812e8e2e247",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 59,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-05-29T17:59:24.099Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "8d65d687-b3d4-4769-b70c-d3dc48ca2b0a",
+			"name": "Comprobar API",
+			"url": "https://simple-books-api.glitch.me",
+			"time": 465,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"API exists": true,
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"API exists": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				465
+			],
+			"allTests": [
+				{
+					"API exists": true,
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "121eceec-94ff-4301-b8f7-471c34941361",
+			"name": "Comprobar estado API",
+			"url": "https://simple-books-api.glitch.me/status",
+			"time": 118,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"API Status is OK": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"API Status is OK": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				118
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"API Status is OK": true
+				}
+			]
+		},
+		{
+			"id": "e4ef7931-0662-4fc3-9b29-2c8b5b16a48e",
+			"name": "Lista de libros",
+			"url": "https://simple-books-api.glitch.me/books",
+			"time": 173,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"List of books exists": true,
+				"List of books is an array": true,
+				"List of books is not empty": true,
+				"Each book has information": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List of books exists": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List of books is an array": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List of books is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Each book has information": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				173
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"List of books exists": true,
+					"List of books is an array": true,
+					"List of books is not empty": true,
+					"Each book has information": true
+				}
+			]
+		},
+		{
+			"id": "1e80b5f2-e7bc-469a-a1e1-071ea37aa4a3",
+			"name": "1 libro",
+			"url": "https://simple-books-api.glitch.me/books/1",
+			"time": 113,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Book exists": true,
+				"Found book is the right one": true,
+				"Book is not empty": true,
+				"Book has price": true,
+				"Book has availability": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Book exists": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found book is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Book is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Book has price": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Book has availability": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				113
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Book exists": true,
+					"Found book is the right one": true,
+					"Book is not empty": true,
+					"Book has price": true,
+					"Book has availability": true
+				}
+			]
+		},
+		{
+			"id": "ad7c8b7e-6ead-4598-9a20-f9c18130ea7a",
+			"name": "Registro en API Manual",
+			"url": "https://simple-books-api.glitch.me/api-clients/",
+			"time": 163,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status is 201 - Created": true,
+				"Access Token exists": true
+			},
+			"testPassFailCounts": {
+				"Status is 201 - Created": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Access Token exists": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				163
+			],
+			"allTests": [
+				{
+					"Status is 201 - Created": true,
+					"Access Token exists": true
+				}
+			]
+		},
+		{
+			"id": "9a4fcf2d-219e-461a-aed7-cb3f0deaa455",
+			"name": "Doble registro no disponible",
+			"url": "https://simple-books-api.glitch.me/api-clients/",
+			"time": 329,
+			"responseCode": {
+				"code": 409,
+				"name": "Conflict"
+			},
+			"tests": {
+				"Status is 409": true,
+				"Already registered": true
+			},
+			"testPassFailCounts": {
+				"Status is 409": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Already registered": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				329
+			],
+			"allTests": [
+				{
+					"Status is 409": true,
+					"Already registered": true
+				}
+			]
+		},
+		{
+			"id": "ef7100e2-cbcf-4518-9d6b-9403326ebb76",
+			"name": "Registro en API Random",
+			"url": "https://simple-books-api.glitch.me/api-clients/",
+			"time": 617,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status is 201 - Created": true,
+				"Access Token exists": true
+			},
+			"testPassFailCounts": {
+				"Status is 201 - Created": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Access Token exists": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				617
+			],
+			"allTests": [
+				{
+					"Status is 201 - Created": true,
+					"Access Token exists": true
+				}
+			]
+		},
+		{
+			"id": "9f0e3dbc-60c5-4cdc-bc86-ce35e2c49283",
+			"name": "Pedido libro disponible",
+			"url": "https://simple-books-api.glitch.me/orders",
+			"time": 430,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status is 201": true,
+				"Order is created": true,
+				"Order ID exists": true,
+				"Access Token header is present": true
+			},
+			"testPassFailCounts": {
+				"Status is 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Order is created": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Order ID exists": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Access Token header is present": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				430
+			],
+			"allTests": [
+				{
+					"Status is 201": true,
+					"Order is created": true,
+					"Order ID exists": true,
+					"Access Token header is present": true
+				}
+			]
+		},
+		{
+			"id": "b00e1c71-2d28-43c7-a591-ed9aa0141705",
+			"name": "Comprobación pedido realizado",
+			"url": "https://simple-books-api.glitch.me/orders/uyscHpwvpymQTaMpn_wyP",
+			"time": 246,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Access Token header is present": true,
+				"Order exists": true,
+				"Found order is the right one": true,
+				"Order is not empty": true,
+				"Book has a customer name": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Access Token header is present": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Order exists": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found order is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Order is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Book has a customer name": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				246
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Access Token header is present": true,
+					"Order exists": true,
+					"Found order is the right one": true,
+					"Order is not empty": true,
+					"Book has a customer name": true
+				}
+			]
+		},
+		{
+			"id": "61b9a2bf-9e93-4754-8bd2-ae87b5f5e991",
+			"name": "Pedido libro no disponible",
+			"url": "https://simple-books-api.glitch.me/orders",
+			"time": 116,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status is 404": true,
+				"Access Token header is present": true,
+				"Book without stock cannot be ordered": true
+			},
+			"testPassFailCounts": {
+				"Status is 404": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Access Token header is present": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Book without stock cannot be ordered": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				116
+			],
+			"allTests": [
+				{
+					"Status is 404": true,
+					"Access Token header is present": true,
+					"Book without stock cannot be ordered": true
+				}
+			]
+		},
+		{
+			"id": "d18450ea-84e7-46e1-91b8-71a6b28dabdd",
+			"name": "Lista pedidos",
+			"url": "https://simple-books-api.glitch.me/orders",
+			"time": 120,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Access Token header is present": true,
+				"List of orders exists": true,
+				"List of orders is an array": true,
+				"List of orders is not empty": true,
+				"Each order has information": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Access Token header is present": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List of orders exists": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List of orders is an array": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List of orders is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Each order has information": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				120
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Access Token header is present": true,
+					"List of orders exists": true,
+					"List of orders is an array": true,
+					"List of orders is not empty": true,
+					"Each order has information": true
+				}
+			]
+		},
+		{
+			"id": "a52d43da-1c59-4416-b020-e4c61b202fd0",
+			"name": "1 pedido",
+			"url": "https://simple-books-api.glitch.me/orders/uyscHpwvpymQTaMpn_wyP",
+			"time": 120,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Access Token header is present": true,
+				"Order exists": true,
+				"Found order is the right one": true,
+				"Order is not empty": true,
+				"Book has a customer name": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Access Token header is present": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Order exists": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found order is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Order is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Book has a customer name": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				120
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Access Token header is present": true,
+					"Order exists": true,
+					"Found order is the right one": true,
+					"Order is not empty": true,
+					"Book has a customer name": true
+				}
+			]
+		},
+		{
+			"id": "d26ae772-d2d6-4c57-90a3-13344905486b",
+			"name": "Modificar 1 pedido",
+			"url": "https://simple-books-api.glitch.me/orders/uyscHpwvpymQTaMpn_wyP",
+			"time": 276,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Access Token header is present": true,
+				"Updated correctly": true
+			},
+			"testPassFailCounts": {
+				"Access Token header is present": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Updated correctly": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				276
+			],
+			"allTests": [
+				{
+					"Access Token header is present": true,
+					"Updated correctly": true
+				}
+			]
+		},
+		{
+			"id": "748143ca-84a2-402a-a3bf-1d50e32192a8",
+			"name": "Comprobación pedido modificado",
+			"url": "https://simple-books-api.glitch.me/orders/uyscHpwvpymQTaMpn_wyP",
+			"time": 186,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Access Token header is present": true,
+				"Order exists": true,
+				"Found order is the right one": true,
+				"Order is not empty": true,
+				"Book has a customer name": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Access Token header is present": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Order exists": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found order is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Order is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Book has a customer name": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				186
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Access Token header is present": true,
+					"Order exists": true,
+					"Found order is the right one": true,
+					"Order is not empty": true,
+					"Book has a customer name": true
+				}
+			]
+		},
+		{
+			"id": "d24de66a-7695-4e46-af78-412cc75bfdc6",
+			"name": "Eliminar 1 pedido",
+			"url": "https://simple-books-api.glitch.me/orders/uyscHpwvpymQTaMpn_wyP",
+			"time": 254,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Access Token header is present": true,
+				"Deleted correctly": true
+			},
+			"testPassFailCounts": {
+				"Access Token header is present": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deleted correctly": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				254
+			],
+			"allTests": [
+				{
+					"Access Token header is present": true,
+					"Deleted correctly": true
+				}
+			]
+		},
+		{
+			"id": "8e895089-c511-442b-8c28-ca799c4e8f79",
+			"name": "Comprobación pedido eliminado",
+			"url": "https://simple-books-api.glitch.me/orders/uyscHpwvpymQTaMpn_wyP",
+			"time": 211,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Access Token header is present": true,
+				"Order deleted": true,
+				"Order not found (404) because of deletion": true
+			},
+			"testPassFailCounts": {
+				"Access Token header is present": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Order deleted": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Order not found (404) because of deletion": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				211
+			],
+			"allTests": [
+				{
+					"Access Token header is present": true,
+					"Order deleted": true,
+					"Order not found (404) because of deletion": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 3937,
+	"collection": {
+		"requests": [
+			{
+				"id": "8d65d687-b3d4-4769-b70c-d3dc48ca2b0a",
+				"method": "GET"
+			},
+			{
+				"id": "121eceec-94ff-4301-b8f7-471c34941361",
+				"method": "GET"
+			},
+			{
+				"id": "e4ef7931-0662-4fc3-9b29-2c8b5b16a48e",
+				"method": "GET"
+			},
+			{
+				"id": "1e80b5f2-e7bc-469a-a1e1-071ea37aa4a3",
+				"method": "GET"
+			},
+			{
+				"id": "ad7c8b7e-6ead-4598-9a20-f9c18130ea7a",
+				"method": "POST"
+			},
+			{
+				"id": "9a4fcf2d-219e-461a-aed7-cb3f0deaa455",
+				"method": "POST"
+			},
+			{
+				"id": "ef7100e2-cbcf-4518-9d6b-9403326ebb76",
+				"method": "POST"
+			},
+			{
+				"id": "9f0e3dbc-60c5-4cdc-bc86-ce35e2c49283",
+				"method": "POST"
+			},
+			{
+				"id": "b00e1c71-2d28-43c7-a591-ed9aa0141705",
+				"method": "GET"
+			},
+			{
+				"id": "61b9a2bf-9e93-4754-8bd2-ae87b5f5e991",
+				"method": "POST"
+			},
+			{
+				"id": "d18450ea-84e7-46e1-91b8-71a6b28dabdd",
+				"method": "GET"
+			},
+			{
+				"id": "a52d43da-1c59-4416-b020-e4c61b202fd0",
+				"method": "GET"
+			},
+			{
+				"id": "d26ae772-d2d6-4c57-90a3-13344905486b",
+				"method": "PATCH"
+			},
+			{
+				"id": "748143ca-84a2-402a-a3bf-1d50e32192a8",
+				"method": "GET"
+			},
+			{
+				"id": "d24de66a-7695-4e46-af78-412cc75bfdc6",
+				"method": "DELETE"
+			},
+			{
+				"id": "8e895089-c511-442b-8c28-ca799c4e8f79",
+				"method": "GET"
+			}
+		]
+	}
+}

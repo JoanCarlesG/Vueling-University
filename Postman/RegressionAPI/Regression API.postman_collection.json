@@ -1,0 +1,959 @@
+{
+	"info": {
+		"_postman_id": "57c686e0-ab21-4fbd-9d94-1812e8e2e247",
+		"name": "Regression API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27570617"
+	},
+	"item": [
+		{
+			"name": "TC01 Estado API",
+			"item": [
+				{
+					"name": "Comprobar API",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"pm.test(\"API exists\", () =>{\r",
+									"    pm.expect(response).to.exist;\r",
+									"})\r",
+									"validateOK200(pm);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mainUrl}}",
+							"host": [
+								"{{mainUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comprobar estado API",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"validateOK200(pm);\r",
+									"pm.test(\"API Status is OK\", () => {\r",
+									"    pm.expect(response.status).to.be.equal(\"OK\");\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mainUrl}}/status",
+							"host": [
+								"{{mainUrl}}"
+							],
+							"path": [
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TC02 Ver Libros",
+			"item": [
+				{
+					"name": "Lista de libros",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"validateOK200(pm);\r",
+									"const response = pm.response.json();\r",
+									"pm.collectionVariables.set(\"totalBooks\", response.length);\r",
+									"pm.test(\"List of books exists\", () => {\r",
+									"    pm.expect(response).to.exist;\r",
+									"})\r",
+									"pm.test(\"List of books is an array\", () => {\r",
+									"    pm.expect(response).to.be.an(\"Array\");\r",
+									"})\r",
+									"pm.test(\"List of books is not empty\", () => {\r",
+									"    pm.expect(response).to.not.be.empty;\r",
+									"})\r",
+									"pm.test(\"Each book has information\", () => {\r",
+									"    for(i = 0; i < response.length; i++){\r",
+									"            pm.expect(response[i]).to.not.be.empty;\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mainUrl}}/books",
+							"host": [
+								"{{mainUrl}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1 libro",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"bookId\", 1);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"validateOK200(pm);\r",
+									"const response = pm.response.json();\r",
+									"let bookId = pm.collectionVariables.get(\"bookId\");\r",
+									"\r",
+									"pm.test(\"Book exists\", () => {\r",
+									"    pm.expect(response).to.exist;\r",
+									"})\r",
+									"pm.test(\"Found book is the right one\", () => {\r",
+									"    pm.expect(response.id).to.be.equal(bookId);\r",
+									"})\r",
+									"pm.test(\"Book is not empty\", () => {\r",
+									"    pm.expect(response).to.not.be.empty;\r",
+									"})\r",
+									"pm.test(\"Book has price\", () => {\r",
+									"    pm.expect(response.price.toString()).to.not.be.empty;\r",
+									"})\r",
+									"pm.test(\"Book has availability\", () => {\r",
+									"    pm.expect(response[\"current-stock\"]).to.be.above(0);\r",
+									"    pm.expect(response.available.toString()).to.not.be.empty;\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mainUrl}}/books/{{bookId}}",
+							"host": [
+								"{{mainUrl}}"
+							],
+							"path": [
+								"books",
+								"{{bookId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TC03 Registro API Manual",
+			"item": [
+				{
+					"name": "Registro en API Manual",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"let accessToken = response.accessToken;\r",
+									"pm.collectionVariables.set(\"accessToken\", accessToken);\r",
+									"\r",
+									"pm.test(\"Status is 201 - Created\", () => {\r",
+									"    pm.response.to.have.status(201);\r",
+									"})\r",
+									"pm.test(\"Access Token exists\", function () {\r",
+									"    pm.expect(accessToken).to.not.be.empty;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"clientName\": \"JCGM\",\r\n   \"clientEmail\": \"jcgm@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mainUrl}}/api-clients/",
+							"host": [
+								"{{mainUrl}}"
+							],
+							"path": [
+								"api-clients",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Doble registro no disponible",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"let accessToken = response.accessToken;\r",
+									"pm.collectionVariables.set(\"accessToken\", accessToken);\r",
+									"\r",
+									"pm.test(\"Status is 409\", () => {\r",
+									"    pm.response.to.have.status(409);\r",
+									"})\r",
+									"pm.test(\"Already registered\", () => {\r",
+									"    pm.expect(response.error).to.exist;\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"clientName\": \"JC\",\r\n   \"clientEmail\": \"jc@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mainUrl}}/api-clients/",
+							"host": [
+								"{{mainUrl}}"
+							],
+							"path": [
+								"api-clients",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TC04 Registro en API Random",
+			"item": [
+				{
+					"name": "Registro en API Random",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"let accessToken = response.accessToken;\r",
+									"pm.collectionVariables.set(\"accessToken\", accessToken);\r",
+									"\r",
+									"pm.test(\"Status is 201 - Created\", () => {\r",
+									"    pm.response.to.have.status(201);\r",
+									"})\r",
+									"pm.test(\"Access Token exists\", function () {\r",
+									"    pm.expect(accessToken).to.not.be.empty;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"clientName\": \"{{$randomFirstName}}\",\r\n   \"clientEmail\": \"{{$randomEmail}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mainUrl}}/api-clients/",
+							"host": [
+								"{{mainUrl}}"
+							],
+							"path": [
+								"api-clients",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TC05 Realizar pedido",
+			"item": [
+				{
+					"name": "Pedido libro disponible",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"let orderId = response.orderId;\r",
+									"let orderCreated = pm.response.created;\r",
+									"\r",
+									"pm.test(\"Status is 201\", () => {\r",
+									"    pm.response.to.have.status(201);\r",
+									"})\r",
+									"pm.test(\"Order is created\", () => {\r",
+									"    pm.expect(pm.response.status).to.be.equal(\"Created\");\r",
+									"})\r",
+									"pm.test(\"Order ID exists\", function () {\r",
+									"    pm.expect(orderId).to.not.be.empty;\r",
+									"});\r",
+									"pm.test(\"Access Token header is present\", () => {\r",
+									"  pm.request.to.have.header(\"Authorization\");\r",
+									"});\r",
+									"\r",
+									"pm.collectionVariables.set(\"orderId\", orderId);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let totalBooks = (pm.collectionVariables.get(\"totalBooks\") - 1);\r",
+									"function getRandomInt(totalBooks) {\r",
+									"  return Math.floor((Math.random() * totalBooks) +1);\r",
+									"}\r",
+									"pm.collectionVariables.set(\"randomOrder\", getRandomInt(totalBooks));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"bookId\": 1,\r\n  \"customerName\": \"JC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mainUrl}}/orders",
+							"host": [
+								"{{mainUrl}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comprobación pedido realizado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"validateOK200(pm);\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"let orderId = pm.collectionVariables.get(\"orderId\");\r",
+									"\r",
+									"pm.test(\"Access Token header is present\", () => {\r",
+									"  pm.request.to.have.header(\"Authorization\");\r",
+									"});\r",
+									"pm.test(\"Order exists\", () => {\r",
+									"    pm.expect(response).to.exist;\r",
+									"})\r",
+									"pm.test(\"Found order is the right one\", () => {\r",
+									"    pm.expect(response.id).to.be.equal(orderId);\r",
+									"})\r",
+									"pm.test(\"Order is not empty\", () => {\r",
+									"    pm.expect(response).to.not.be.empty;\r",
+									"})\r",
+									"pm.test(\"Book has a customer name\", () => {\r",
+									"    pm.expect(response.customerName).to.not.be.empty;\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mainUrl}}/orders/{{orderId}}",
+							"host": [
+								"{{mainUrl}}"
+							],
+							"path": [
+								"orders",
+								"{{orderId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pedido libro no disponible",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"let orderId = response.orderId;\r",
+									"let orderCreated = pm.response.created;\r",
+									"\r",
+									"pm.test(\"Status is 404\", () => {\r",
+									"    pm.response.to.have.status(404);\r",
+									"})\r",
+									"pm.test(\"Access Token header is present\", () => {\r",
+									"  pm.request.to.have.header(\"Authorization\");\r",
+									"});\r",
+									"pm.test(\"Book without stock cannot be ordered\", () => {\r",
+									"    pm.expect(response.error).to.exist;\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let totalBooks = pm.collectionVariables.get(\"totalBooks\");\r",
+									"function getRandomInt(totalBooks) {\r",
+									"  return Math.floor(Math.random() * totalBooks);\r",
+									"}\r",
+									"pm.collectionVariables.set(\"randomOrder\", getRandomInt(totalBooks));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"bookId\": 2,\r\n  \"customerName\": \"JC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mainUrl}}/orders",
+							"host": [
+								"{{mainUrl}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TC06 Ver pedidos",
+			"item": [
+				{
+					"name": "Lista pedidos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"validateOK200(pm);\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Access Token header is present\", () => {\r",
+									"  pm.request.to.have.header(\"Authorization\");\r",
+									"});\r",
+									"pm.test(\"List of orders exists\", () => {\r",
+									"    pm.expect(response).to.exist;\r",
+									"})\r",
+									"pm.test(\"List of orders is an array\", () => {\r",
+									"    pm.expect(response).to.be.an(\"Array\");\r",
+									"})\r",
+									"pm.test(\"List of orders is not empty\", () => {\r",
+									"    pm.expect(response).to.not.be.empty;\r",
+									"})\r",
+									"pm.test(\"Each order has information\", () => {\r",
+									"    for(i = 0; i < response.length; i++){\r",
+									"            pm.expect(response[i]).to.not.be.empty;\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mainUrl}}/orders",
+							"host": [
+								"{{mainUrl}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1 pedido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"validateOK200(pm);\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"let orderId = pm.collectionVariables.get(\"orderId\");\r",
+									"\r",
+									"pm.test(\"Access Token header is present\", () => {\r",
+									"  pm.request.to.have.header(\"Authorization\");\r",
+									"});\r",
+									"pm.test(\"Order exists\", () => {\r",
+									"    pm.expect(response).to.exist;\r",
+									"})\r",
+									"pm.test(\"Found order is the right one\", () => {\r",
+									"    pm.expect(response.id).to.be.equal(orderId);\r",
+									"})\r",
+									"pm.test(\"Order is not empty\", () => {\r",
+									"    pm.expect(response).to.not.be.empty;\r",
+									"})\r",
+									"pm.test(\"Book has a customer name\", () => {\r",
+									"    pm.expect(response.customerName).to.not.be.empty;\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mainUrl}}/orders/{{orderId}}",
+							"host": [
+								"{{mainUrl}}"
+							],
+							"path": [
+								"orders",
+								"{{orderId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TC07 Modificar pedido",
+			"item": [
+				{
+					"name": "Modificar 1 pedido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Access Token header is present\", () => {\r",
+									"  pm.request.to.have.header(\"Authorization\");\r",
+									"});\r",
+									"pm.test(\"Updated correctly\", () => {\r",
+									"    pm.response.to.have.status(204);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customerName\": \"JC Evil Twin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{mainUrl}}/orders/{{orderId}}",
+							"host": [
+								"{{mainUrl}}"
+							],
+							"path": [
+								"orders",
+								"{{orderId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comprobación pedido modificado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"validateOK200(pm);\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"let orderId = pm.collectionVariables.get(\"orderId\");\r",
+									"\r",
+									"pm.test(\"Access Token header is present\", () => {\r",
+									"  pm.request.to.have.header(\"Authorization\");\r",
+									"});\r",
+									"pm.test(\"Order exists\", () => {\r",
+									"    pm.expect(response).to.exist;\r",
+									"})\r",
+									"pm.test(\"Found order is the right one\", () => {\r",
+									"    pm.expect(response.id).to.be.equal(orderId);\r",
+									"})\r",
+									"pm.test(\"Order is not empty\", () => {\r",
+									"    pm.expect(response).to.not.be.empty;\r",
+									"})\r",
+									"pm.test(\"Book has a customer name\", () => {\r",
+									"    pm.expect(response.customerName).to.not.be.empty;\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mainUrl}}/orders/{{orderId}}",
+							"host": [
+								"{{mainUrl}}"
+							],
+							"path": [
+								"orders",
+								"{{orderId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TC08 Eliminar pedido",
+			"item": [
+				{
+					"name": "Eliminar 1 pedido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Access Token header is present\", () => {\r",
+									"  pm.request.to.have.header(\"Authorization\");\r",
+									"});\r",
+									"pm.test(\"Deleted correctly\", () => {\r",
+									"    pm.response.to.have.status(204);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{mainUrl}}/orders/{{orderId}}",
+							"host": [
+								"{{mainUrl}}"
+							],
+							"path": [
+								"orders",
+								"{{orderId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comprobación pedido eliminado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"let orderId = pm.collectionVariables.get(\"orderId\");\r",
+									"\r",
+									"pm.test(\"Access Token header is present\", () => {\r",
+									"  pm.request.to.have.header(\"Authorization\");\r",
+									"});\r",
+									"pm.test(\"Order deleted\", () => {\r",
+									"    pm.expect(response.error).to.exist;\r",
+									"})\r",
+									"pm.test(\"Order not found (404) because of deletion\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{mainUrl}}/orders/{{orderId}}",
+							"host": [
+								"{{mainUrl}}"
+							],
+							"path": [
+								"orders",
+								"{{orderId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"validateOK200 = function (pm) {",
+					"    pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "mainUrl",
+			"value": "https://simple-books-api.glitch.me"
+		},
+		{
+			"key": "bookId",
+			"value": "1"
+		},
+		{
+			"key": "accessToken",
+			"value": ""
+		},
+		{
+			"key": "orderId",
+			"value": ""
+		},
+		{
+			"key": "totalBooks",
+			"value": ""
+		},
+		{
+			"key": "randomOrder",
+			"value": ""
+		}
+	]
+}
