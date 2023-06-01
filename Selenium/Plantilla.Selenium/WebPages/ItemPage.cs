@@ -29,6 +29,13 @@ namespace Demoblaze.WebPages
         {
             get { return WebDriver.FindElementById("cartur"); }
         }
+        private IWebElement BtnHome
+        {
+            get { return WebDriver.FindElementByXPath("//a[text() = 'Home ']"); }
+        }
+
+
+
 
         public ItemPage AddToCart()
         {
@@ -36,10 +43,26 @@ namespace Demoblaze.WebPages
             return this;
         }
 
+        public ItemPage AcceptAlert()
+        {
+            //WebDriverWait wait = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(10));
+            //IAlert alert = wait.Until(ExpectedConditions.AlertIsPresent());
+            
+            IAlert alert = new WebDriverWait(WebDriver, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.AlertIsPresent());
+            alert.Accept();
+            return this;
+        }
+
 
         public ItemPage GotToCart()
         {
             BtnCart.Click();
+            return this;
+        }
+
+        public ItemPage GoHome()
+        {
+            BtnHome.Click();
             return this;
         }
     }

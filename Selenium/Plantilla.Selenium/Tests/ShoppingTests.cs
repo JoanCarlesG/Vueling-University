@@ -36,42 +36,105 @@ namespace Demoblaze.Tests
         public void PurchasePhoneTest()
         {
             string category = "Phones";
-            string laptop = "Sony xperia z5";
+            string phone = "Sony xperia z5";
             homePage = new WebPages.HomePage(setUpWebDriver);
             homePage.LoginPage();
             loginPage = new WebPages.LoginPage(setUpWebDriver);
             loginPage.FillAndSubmitLoginForm();
             homePage.ConfirmUser();
             homePage.GetCategory(category);
-            homePage.SelectItem(laptop);
+            homePage.SelectItem(phone);
             itemPage = new WebPages.ItemPage(setUpWebDriver);
             itemPage.AddToCart();
             itemPage.GotToCart();
             cartPage = new WebPages.CartPage(setUpWebDriver);
             cartPage.PlaceOrder();
             cartPage.FillAndSubmitForm();
-
         }
 
         [TestCase]
         public void PurchaseMonitorTest()
         {
             string category = "Monitors";
-            string laptop = "Apple monitor 24";
+            string monitor = "Apple monitor 24";
             homePage = new WebPages.HomePage(setUpWebDriver);
             homePage.LoginPage();
             loginPage = new WebPages.LoginPage(setUpWebDriver);
             loginPage.FillAndSubmitLoginForm();
             homePage.ConfirmUser();
             homePage.GetCategory(category);
-            homePage.SelectItem(laptop);
+            homePage.SelectItem(monitor);
             itemPage = new WebPages.ItemPage(setUpWebDriver);
             itemPage.AddToCart();
             itemPage.GotToCart();
             cartPage = new WebPages.CartPage(setUpWebDriver);
             cartPage.PlaceOrder();
             cartPage.FillAndSubmitForm();
+        }
 
+        [TestCase]
+        public void CheckItemsInCartTest()
+        {
+            string category1 = "Monitors";
+            string category2 = "Phones";
+            string monitor = "Apple monitor 24";
+            string phone = "Sony xperia z5";
+
+            homePage = new WebPages.HomePage(setUpWebDriver);
+            homePage.LoginPage();
+            loginPage = new WebPages.LoginPage(setUpWebDriver);
+            loginPage.FillAndSubmitLoginForm();
+            homePage.ConfirmUser();
+            //First Item
+            homePage.GetCategory(category1);
+            homePage.SelectItem(monitor);
+            itemPage = new WebPages.ItemPage(setUpWebDriver);
+            itemPage.AddToCart();
+            itemPage.AcceptAlert();
+            itemPage.GoHome();
+            //Second Item
+            homePage.GetCategory(category2);
+            homePage.SelectItem(phone);
+            itemPage.AddToCart();
+            itemPage.AcceptAlert();
+            //Cart
+            itemPage.GotToCart();
+            cartPage = new WebPages.CartPage(setUpWebDriver);
+            //Check items in cart
+            cartPage.CheckItemInCart(monitor);
+            cartPage.CheckItemInCart(phone);
+        }
+
+        [TestCase]
+        public void DeleteItemsInCartTest()
+        {
+            string category1 = "Monitors";
+            string category2 = "Phones";
+            string monitor = "Apple monitor 24";
+            string phone = "Sony xperia z5";
+
+            homePage = new WebPages.HomePage(setUpWebDriver);
+            homePage.LoginPage();
+            loginPage = new WebPages.LoginPage(setUpWebDriver);
+            loginPage.FillAndSubmitLoginForm();
+            homePage.ConfirmUser();
+            //First Item
+            homePage.GetCategory(category1);
+            homePage.SelectItem(monitor);
+            itemPage = new WebPages.ItemPage(setUpWebDriver);
+            itemPage.AddToCart();
+            itemPage.AcceptAlert();
+            itemPage.GoHome();
+            //Second Item
+            homePage.GetCategory(category2);
+            homePage.SelectItem(phone);
+            itemPage.AddToCart();
+            itemPage.AcceptAlert();
+            //Cart
+            itemPage.GotToCart();
+            cartPage = new WebPages.CartPage(setUpWebDriver);
+            //Check items in cart
+            cartPage.DeleteItemInCart(monitor);
         }
     }
 }

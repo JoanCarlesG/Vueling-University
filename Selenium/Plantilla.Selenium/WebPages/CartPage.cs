@@ -76,6 +76,14 @@ namespace Demoblaze.WebPages
         {
             get { return WebDriver.FindElementByXPath("//*[text() = 'Products']"); }
         }
+        private IWebElement ItemInCart (string item)
+        {
+            return WebDriver.FindElementByXPath("//td[text() = '" + item + "']");
+        }
+        private IWebElement BtnDeleteItemInCart (string item)
+        {
+            return WebDriver.FindElementByXPath("//td[text()='" + item + "']/../td/a");
+        }
 
 
 
@@ -100,5 +108,19 @@ namespace Demoblaze.WebPages
             Assert.AreEqual("Thank you for your purchase!", _OrderConfirmationMessage.Text);
             return this;
         }
+
+        public CartPage CheckItemInCart(string item)
+        {
+            Assert.AreEqual(ItemInCart(item).Text, item);
+            return this;
+        }
+
+        public CartPage DeleteItemInCart(string item)
+        {
+            BtnDeleteItemInCart(item).Click();
+            return this;
+        }
+
+        
     }
 }
