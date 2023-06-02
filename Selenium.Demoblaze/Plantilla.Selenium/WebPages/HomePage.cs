@@ -125,7 +125,6 @@ namespace Demoblaze.WebPages
 
         public HomePage SelectItem(string item) 
         {
-            Jse2.ExecuteScript("arguments[0].scrollIntoView()", SelectedItem(item));
             SelectedItem(item).Click();
             return this;
         }

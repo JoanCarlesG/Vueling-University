@@ -11,6 +11,7 @@ using System.Threading;
 using Demoblaze.Common;
 using OpenQA.Selenium.Support.UI;
 using NUnit.Framework;
+using AventStack.ExtentReports.Utils;
 
 namespace Demoblaze.WebPages
 {
@@ -105,14 +106,19 @@ namespace Demoblaze.WebPages
             YearField.SendKeys("1111");
             BtnPurchase.Click();
             new WebDriverWait(WebDriver, TimeSpan.FromSeconds(10)).Until(CustomExpectedConditions.ElementIsVisible(OrderConfirmationMessage));
-            Assert.AreEqual("Thank you for your purchase!", _OrderConfirmationMessage.Text);
             return this;
         }
 
-        public CartPage CheckItemInCart(string item)
+        public string GetConfirmationMessage()
         {
-            Assert.AreEqual(ItemInCart(item).Text, item);
-            return this;
+            string message = _OrderConfirmationMessage.Text;
+            return message;
+        }
+
+        public string GetItemInCart(string item)
+        {
+            string name = ItemInCart(item).Text;
+            return name;
         }
 
         public CartPage DeleteItemInCart(string item)
@@ -121,6 +127,17 @@ namespace Demoblaze.WebPages
             return this;
         }
 
+        public bool CheckItemExistsInCart(string item)
+        {
+            if (ItemInCart(item).Displayed)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
+        
         
     }
 }

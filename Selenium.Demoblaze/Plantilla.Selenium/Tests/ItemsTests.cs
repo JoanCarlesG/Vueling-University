@@ -10,13 +10,14 @@ using Demoblaze.WebPages;
 
 namespace Demoblaze.Tests
 {
-    class ShoppingTests : TestSetCleanBase
+    class ItemsTests : TestSetCleanBase
     {
         [TestCase]
         public void PurchaseLaptopTest()
         {
             string category = "Laptops";
             string laptop = "Dell i7 8gb";
+            string message = "Thank you for your purchase!";
             homePage = new WebPages.HomePage(setUpWebDriver);
             homePage.LoginPage();
             loginPage = new WebPages.LoginPage(setUpWebDriver);
@@ -29,7 +30,8 @@ namespace Demoblaze.Tests
             itemPage.GotToCart();
             cartPage = new WebPages.CartPage(setUpWebDriver);
             cartPage.PlaceOrder();
-            cartPage.FillAndSubmitForm(); 
+            cartPage.FillAndSubmitForm();
+            Assert.AreEqual(message, cartPage.GetConfirmationMessage());
         }
 
         [TestCase]
@@ -37,6 +39,7 @@ namespace Demoblaze.Tests
         {
             string category = "Phones";
             string phone = "Sony xperia z5";
+            string message = "Thank you for your purchase!";
             homePage = new WebPages.HomePage(setUpWebDriver);
             homePage.LoginPage();
             loginPage = new WebPages.LoginPage(setUpWebDriver);
@@ -50,6 +53,7 @@ namespace Demoblaze.Tests
             cartPage = new WebPages.CartPage(setUpWebDriver);
             cartPage.PlaceOrder();
             cartPage.FillAndSubmitForm();
+            Assert.AreEqual(message, cartPage.GetConfirmationMessage());
         }
 
         [TestCase]
@@ -57,6 +61,7 @@ namespace Demoblaze.Tests
         {
             string category = "Monitors";
             string monitor = "Apple monitor 24";
+            string message = "Thank you for your purchase!";
             homePage = new WebPages.HomePage(setUpWebDriver);
             homePage.LoginPage();
             loginPage = new WebPages.LoginPage(setUpWebDriver);
@@ -70,6 +75,7 @@ namespace Demoblaze.Tests
             cartPage = new WebPages.CartPage(setUpWebDriver);
             cartPage.PlaceOrder();
             cartPage.FillAndSubmitForm();
+            Assert.AreEqual(message, cartPage.GetConfirmationMessage());
         }
 
         [TestCase]
@@ -101,8 +107,9 @@ namespace Demoblaze.Tests
             itemPage.GotToCart();
             cartPage = new WebPages.CartPage(setUpWebDriver);
             //Check items in cart
-            cartPage.CheckItemInCart(monitor);
-            cartPage.CheckItemInCart(phone);
+            Assert.AreEqual(monitor, cartPage.GetItemInCart(monitor));
+            Assert.AreEqual(phone, cartPage.GetItemInCart(phone));
+            
         }
 
         [TestCase]
@@ -135,6 +142,7 @@ namespace Demoblaze.Tests
             cartPage = new WebPages.CartPage(setUpWebDriver);
             //Check items in cart
             cartPage.DeleteItemInCart(monitor);
+            //Assert.IsFalse(cartPage.CheckItemExistsInCart(monitor));
         }
     }
 }
