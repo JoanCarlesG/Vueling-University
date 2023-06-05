@@ -1,0 +1,2547 @@
+{
+	"id": "98885fec-b642-4eb8-b23f-193eb1513b1e",
+	"name": "Regression TRELLO API",
+	"timestamp": "2023-06-05T07:49:36.361Z",
+	"collection_id": "27570617-f4653c2d-6baf-46d8-b5d5-ad3ba1422518",
+	"folder_id": "27570617-5cf5c8f4-8ed3-4770-abb6-de49f4056c92",
+	"environment_id": "27570617-48bdc474-efe6-4ea5-84b0-b3c74e23ac3c",
+	"totalPass": 225,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-06-05T07:49:15.259Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "724cf887-d816-4590-b2a0-a405470a1f7b",
+			"name": "Get All Boards",
+			"url": "https://api.trello.com/1/members/me/boards?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 246,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an array": true,
+				"Response is empty": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an array": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is empty": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				246
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an array": true,
+					"Response is empty": true
+				}
+			]
+		},
+		{
+			"id": "500f104e-4741-4875-bfc5-45ffdbfdf67b",
+			"name": "Create a Board",
+			"url": "https://api.trello.com/1/boards/?name=Test Board Name&key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 487,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Board has ID": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Board has ID": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				487
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Board has ID": true
+				}
+			]
+		},
+		{
+			"id": "bef632ee-14fc-450e-95ba-a786ae940ae8",
+			"name": "Get 1 Board",
+			"url": "https://api.trello.com/1/boards/647d937c565d4e796bf13664?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 435,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Board is the right one": true,
+				"Board is visible": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Board is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Board is visible": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				435
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Board is the right one": true,
+					"Board is visible": true
+				}
+			]
+		},
+		{
+			"id": "8401e1aa-7dd5-4b89-a438-8871ed961818",
+			"name": "Get 1 Board",
+			"url": "https://api.trello.com/1/boards/647d937c565d4e796bf13664?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 199,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Board is the right one": true,
+				"Board is visible": true,
+				"Board has name": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Board is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Board is visible": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Board has name": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				199
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Board is the right one": true,
+					"Board is visible": true,
+					"Board has name": true
+				}
+			]
+		},
+		{
+			"id": "53d08f05-fac0-4cae-89b8-288a2f947ac2",
+			"name": "Update Board's Name",
+			"url": "https://api.trello.com/1/boards/647d937c565d4e796bf13664?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8&name=New Name",
+			"time": 305,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Board is the right one": true,
+				"Board has updated name": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Board is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Board has updated name": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				305
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Board is the right one": true,
+					"Board has updated name": true
+				}
+			]
+		},
+		{
+			"id": "2ccb2265-4655-479d-afe0-93c5b06a0fe7",
+			"name": "Get 1 Board",
+			"url": "https://api.trello.com/1/boards/647d937c565d4e796bf13664?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 204,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Board is the right one": true,
+				"Board name is different": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Board is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Board name is different": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				204
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Board is the right one": true,
+					"Board name is different": true
+				}
+			]
+		},
+		{
+			"id": "6ee765b2-ae7c-47f5-8f58-c53bab416bc8",
+			"name": "Get 1 Board",
+			"url": "https://api.trello.com/1/boards/647d937c565d4e796bf13664?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 329,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Board is the right one": true,
+				"Board exists": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Board is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Board exists": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				329
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Board is the right one": true,
+					"Board exists": true
+				}
+			]
+		},
+		{
+			"id": "dd8e7f9b-6228-4631-ace4-2ad9d1dc4e2f",
+			"name": "Delete Board",
+			"url": "https://api.trello.com/1/boards/647d937c565d4e796bf13664?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 1185,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Board is deleted": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Board is deleted": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1185
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Board is deleted": true
+				}
+			]
+		},
+		{
+			"id": "855278be-86ba-4f7f-acd6-174537d8ac8c",
+			"name": "Get 1 Board",
+			"url": "https://api.trello.com/1/boards/647d937c565d4e796bf13664?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 233,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code is 404": true
+			},
+			"testPassFailCounts": {
+				"Status code is 404": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				233
+			],
+			"allTests": [
+				{
+					"Status code is 404": true
+				}
+			]
+		},
+		{
+			"id": "04859d61-deb0-47cf-bebf-0d043d5adfa8",
+			"name": "Create a Board",
+			"url": "https://api.trello.com/1/boards/?name=Test Board Name&key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 580,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Board has ID": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Board has ID": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				580
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Board has ID": true
+				}
+			]
+		},
+		{
+			"id": "232a87c2-4fb3-4721-a331-9dc266bc5336",
+			"name": "Get 1 Board",
+			"url": "https://api.trello.com/1/boards/647d9381559259b8da0ca1c8?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 236,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Board is the right one": true,
+				"Board is visible": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Board is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Board is visible": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				236
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Board is the right one": true,
+					"Board is visible": true
+				}
+			]
+		},
+		{
+			"id": "48ef870d-6d3c-410c-88cc-beb25fb60424",
+			"name": "Create List",
+			"url": "https://api.trello.com/1/lists?name=Test List Name&idBoard=647d9381559259b8da0ca1c8&key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 588,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"List has ID": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List has ID": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				588
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"List has ID": true
+				}
+			]
+		},
+		{
+			"id": "496e53f1-3847-43d1-a8d7-82c41c9668fb",
+			"name": "Get 1 List",
+			"url": "https://api.trello.com/1/lists/647d9382e0edd28b3e7d32f8?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 191,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found List is the right one": true,
+				"List is visible": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found List is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List is visible": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				191
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found List is the right one": true,
+					"List is visible": true
+				}
+			]
+		},
+		{
+			"id": "919fc9b1-96d6-4d19-baad-cb02fd25f13f",
+			"name": "Get 1 List",
+			"url": "https://api.trello.com/1/lists/647d9382e0edd28b3e7d32f8?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 421,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found List is the right one": true,
+				"List is visible": true,
+				"List has name": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found List is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List is visible": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List has name": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				421
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found List is the right one": true,
+					"List is visible": true,
+					"List has name": true
+				}
+			]
+		},
+		{
+			"id": "0c7a1abb-89f9-47be-bf3e-7fc618a30bc3",
+			"name": "Update List's Name",
+			"url": "https://api.trello.com/1/lists/647d9382e0edd28b3e7d32f8?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8&name=New List Name",
+			"time": 241,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found List is the right one": true,
+				"List has updated name": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found List is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List has updated name": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				241
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found List is the right one": true,
+					"List has updated name": true
+				}
+			]
+		},
+		{
+			"id": "37d3b383-4b21-4c00-b8db-901cff2a8565",
+			"name": "Get 1 List",
+			"url": "https://api.trello.com/1/lists/647d9382e0edd28b3e7d32f8?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 240,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found List is the right one": true,
+				"List name is different": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found List is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List name is different": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				240
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found List is the right one": true,
+					"List name is different": true
+				}
+			]
+		},
+		{
+			"id": "8d36b489-dbf5-4b06-b1cd-73274fb86d40",
+			"name": "Create List",
+			"url": "https://api.trello.com/1/lists?name=Test List Name&idBoard=647d9381559259b8da0ca1c8&key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 329,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"List has ID": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List has ID": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				329
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"List has ID": true
+				}
+			]
+		},
+		{
+			"id": "cd20d8da-aeb6-49cf-a2e2-5cc5fe5fed50",
+			"name": "Get 1 List",
+			"url": "https://api.trello.com/1/lists/647d9383e6be5ba316f0de80?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 243,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found List is the right one": true,
+				"List is visible": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found List is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List is visible": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				243
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found List is the right one": true,
+					"List is visible": true
+				}
+			]
+		},
+		{
+			"id": "c6b623ad-7cfd-40a2-a089-ffdcec66a9ff",
+			"name": "Archive List",
+			"url": "https://api.trello.com/1/lists/647d9383e6be5ba316f0de80/closed?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8&value=true",
+			"time": 561,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found List is the right one": true,
+				"List is NOT visible": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found List is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List is NOT visible": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				561
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found List is the right one": true,
+					"List is NOT visible": true
+				}
+			]
+		},
+		{
+			"id": "7d549e1a-dcb3-487a-841b-fcdf44be6579",
+			"name": "Create List",
+			"url": "https://api.trello.com/1/lists?name=Test List Name&idBoard=647d9381559259b8da0ca1c8&key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 300,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"List has ID": true,
+				"List is visible": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List has ID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List is visible": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				300
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"List has ID": true,
+					"List is visible": true
+				}
+			]
+		},
+		{
+			"id": "ba70a00d-a931-4285-b8ac-974fcbda48f1",
+			"name": "Get 1 List",
+			"url": "https://api.trello.com/1/lists/647d9385168a1743d5f8a52b?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 266,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found List is the right one": true,
+				"List is visible": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found List is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List is visible": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				266
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found List is the right one": true,
+					"List is visible": true
+				}
+			]
+		},
+		{
+			"id": "56f695c5-d894-4f23-8a25-895964f0d9ac",
+			"name": "Create Card",
+			"url": "https://api.trello.com/1/cards?idList=647d9385168a1743d5f8a52b&key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 451,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Card has ID": true,
+				"Card is visible": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card has ID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card is visible": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				451
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Card has ID": true,
+					"Card is visible": true
+				}
+			]
+		},
+		{
+			"id": "c05ad84f-db8b-42a7-83c0-bdd5f312fcba",
+			"name": "Get 1 Card",
+			"url": "https://api.trello.com/1/cards/647d9386412e8112cd1753cd?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 268,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Card is the right one": true,
+				"Card is visible": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Card is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card is visible": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				268
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Card is the right one": true,
+					"Card is visible": true
+				}
+			]
+		},
+		{
+			"id": "3d4a4ff9-fcd4-4ba7-afda-32936cb4908b",
+			"name": "Create Card",
+			"url": "https://api.trello.com/1/cards?idList=647d9385168a1743d5f8a52b&key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 401,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Card has ID": true,
+				"Card is visible": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card has ID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card is visible": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				401
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Card has ID": true,
+					"Card is visible": true
+				}
+			]
+		},
+		{
+			"id": "e9b6aefe-3c15-41b3-8b4e-3dd59e784f50",
+			"name": "Get 1 Card",
+			"url": "https://api.trello.com/1/cards/647d9386a772b3e8646bba1c?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 264,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Card is the right one": true,
+				"Card is visible": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Card is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card is visible": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				264
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Card is the right one": true,
+					"Card is visible": true
+				}
+			]
+		},
+		{
+			"id": "dec0b216-fa6c-45a7-b5f3-fe4729b5f537",
+			"name": "Update Card's Name",
+			"url": "https://api.trello.com/1/cards/647d9386a772b3e8646bba1c?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8&name=Test Card Name",
+			"time": 288,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Card is the right one": true,
+				"Card has updated name": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Card is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card has updated name": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				288
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Card is the right one": true,
+					"Card has updated name": true
+				}
+			]
+		},
+		{
+			"id": "8fd053f8-10dd-4145-a274-fbc16f432dd1",
+			"name": "Get 1 Card",
+			"url": "https://api.trello.com/1/cards/647d9386a772b3e8646bba1c?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 300,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Card is the right one": true,
+				"Card name is different": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Card is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card name is different": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				300
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Card is the right one": true,
+					"Card name is different": true
+				}
+			]
+		},
+		{
+			"id": "35809d6c-293e-4e31-9ba8-36608e14ea75",
+			"name": "Get 1 Card",
+			"url": "https://api.trello.com/1/cards/647d9386a772b3e8646bba1c?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 254,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Card is the right one": true,
+				"Card is visible": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Card is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card is visible": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				254
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Card is the right one": true,
+					"Card is visible": true
+				}
+			]
+		},
+		{
+			"id": "784c6f18-85db-4254-ac29-e2657a15bd92",
+			"name": "Update Card's Desc",
+			"url": "https://api.trello.com/1/cards/647d9386a772b3e8646bba1c?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8&desc=Test Card Description",
+			"time": 370,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Card is the right one": true,
+				"Card has updated description": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Card is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card has updated description": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				370
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Card is the right one": true,
+					"Card has updated description": true
+				}
+			]
+		},
+		{
+			"id": "81a85e72-73d8-4583-a66c-55166889c2d9",
+			"name": "Get 1 Card",
+			"url": "https://api.trello.com/1/cards/647d9386a772b3e8646bba1c?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 282,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Card is the right one": true,
+				"Card description is different": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Card is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card description is different": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				282
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Card is the right one": true,
+					"Card description is different": true
+				}
+			]
+		},
+		{
+			"id": "a299f7fc-ccba-4925-a99c-060f4449e263",
+			"name": "Get 1 Card",
+			"url": "https://api.trello.com/1/cards/647d9386a772b3e8646bba1c?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 375,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Card is the right one": true,
+				"Card is visible": true,
+				"Card color is Null": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Card is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card is visible": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card color is Null": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				375
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Card is the right one": true,
+					"Card is visible": true,
+					"Card color is Null": true
+				}
+			]
+		},
+		{
+			"id": "cebb5424-5ef3-4071-89d7-be6c79bb6493",
+			"name": "Update Card's Cover Color",
+			"url": "https://api.trello.com/1/cards/647d9386a772b3e8646bba1c?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8&name=Test Card Name&desc=Test Card Description",
+			"time": 340,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Card is the right one": true,
+				"Card has updated color": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Card is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card has updated color": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				340
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Card is the right one": true,
+					"Card has updated color": true
+				}
+			]
+		},
+		{
+			"id": "4ed48a87-bea8-4bf6-b3bb-653bddf4492a",
+			"name": "Get 1 Card",
+			"url": "https://api.trello.com/1/cards/647d9386a772b3e8646bba1c?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 289,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Card is the right one": true,
+				"Card color is different": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Card is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card color is different": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				289
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Card is the right one": true,
+					"Card color is different": true
+				}
+			]
+		},
+		{
+			"id": "13b70bff-243e-4bfc-9a3e-37af57a301d3",
+			"name": "Get 1 List",
+			"url": "https://api.trello.com/1/lists/647d9385168a1743d5f8a52b?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 239,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"List is visible": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List is visible": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				239
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"List is visible": true
+				}
+			]
+		},
+		{
+			"id": "8a33ce7a-ce71-4778-a59a-4447830bbbd0",
+			"name": "Create Card",
+			"url": "https://api.trello.com/1/cards?idList=647d9385168a1743d5f8a52b&key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 412,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Card has ID": true,
+				"Card is visible": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card has ID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card is visible": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				412
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Card has ID": true,
+					"Card is visible": true
+				}
+			]
+		},
+		{
+			"id": "c727e188-2af1-4da6-8618-8018ae850f39",
+			"name": "Update Card",
+			"url": "https://api.trello.com/1/cards/647d938b39648d565771a26d?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8&name=Test Card Name&desc=Test Card Description",
+			"time": 551,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Card is the right one": true,
+				"Card has updated name": true,
+				"Card has updated description": true,
+				"Card has updated color": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Card is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card has updated name": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card has updated description": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card has updated color": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				551
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Card is the right one": true,
+					"Card has updated name": true,
+					"Card has updated description": true,
+					"Card has updated color": true
+				}
+			]
+		},
+		{
+			"id": "ad2fdd90-1274-45a9-8a47-5ff1d0ae285a",
+			"name": "Create Other List",
+			"url": "https://api.trello.com/1/lists?name=Transfer List Name&idBoard=647d9381559259b8da0ca1c8&key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 266,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"List has ID": true,
+				"List is visible": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List has ID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List is visible": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				266
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"List has ID": true,
+					"List is visible": true
+				}
+			]
+		},
+		{
+			"id": "de8c79ba-9cb6-4093-9cc9-fc8a560289bd",
+			"name": "Move 1 Card to List",
+			"url": "https://api.trello.com/1/cards/647d938b39648d565771a26d?idList=647d938c2af202e6d69eb93b&key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 554,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Card is the right one": true,
+				"Card has moved to new List": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Card is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card has moved to new List": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				554
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Card is the right one": true,
+					"Card has moved to new List": true
+				}
+			]
+		},
+		{
+			"id": "9107bbd3-38ab-4c02-86f2-33b6a5e71a02",
+			"name": "Create List",
+			"url": "https://api.trello.com/1/lists?name=Multiple Cards List Name&idBoard=647d9381559259b8da0ca1c8&key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 310,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"List has ID": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List has ID": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				310
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"List has ID": true
+				}
+			]
+		},
+		{
+			"id": "83017700-59f8-4990-8e12-880d91ccc7dc",
+			"name": "Get 1 List",
+			"url": "https://api.trello.com/1/lists/647d938d9cd898db55ca0212?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 205,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"List is visible": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List is visible": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				205
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"List is visible": true
+				}
+			]
+		},
+		{
+			"id": "8128ef12-e8b2-4ce7-8055-5a7d4e99e607",
+			"name": "Create Card 1",
+			"url": "https://api.trello.com/1/cards?idList=647d938d9cd898db55ca0212&key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 542,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Card has ID": true,
+				"Card is visible": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card has ID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card is visible": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				542
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Card has ID": true,
+					"Card is visible": true
+				}
+			]
+		},
+		{
+			"id": "b019d13f-1ccd-4b66-869c-6c4bd58d1c86",
+			"name": "Update Card 1",
+			"url": "https://api.trello.com/1/cards/647d938edf0f3669c6850671?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8&name=Test Card Name&desc=Test Card Description",
+			"time": 446,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Card is the right one": true,
+				"Card has updated name": true,
+				"Card has updated description": true,
+				"Card has updated color": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Card is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card has updated name": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card has updated description": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card has updated color": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				446
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Card is the right one": true,
+					"Card has updated name": true,
+					"Card has updated description": true,
+					"Card has updated color": true
+				}
+			]
+		},
+		{
+			"id": "0997cb68-cf96-45e7-9206-e49be92559bb",
+			"name": "Create Card 2",
+			"url": "https://api.trello.com/1/cards?idList=647d938d9cd898db55ca0212&key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 348,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Card has ID": true,
+				"Card is visible": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card has ID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card is visible": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				348
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Card has ID": true,
+					"Card is visible": true
+				}
+			]
+		},
+		{
+			"id": "b9fbe909-7a16-4604-b5a2-89bf6cdf5da1",
+			"name": "Update Card 2",
+			"url": "https://api.trello.com/1/cards/647d938f3a25aa50bdabca23?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8&name=Test Card Name&desc=Test Card Description",
+			"time": 476,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"Found Card is the right one": true,
+				"Card has updated name": true,
+				"Card has updated description": true,
+				"Card has updated color": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Found Card is the right one": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card has updated name": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card has updated description": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Card has updated color": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				476
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"Found Card is the right one": true,
+					"Card has updated name": true,
+					"Card has updated description": true,
+					"Card has updated color": true
+				}
+			]
+		},
+		{
+			"id": "c72e375f-873e-410a-8812-4383b859570f",
+			"name": "Create Other List",
+			"url": "https://api.trello.com/1/lists?name=Multiple Transfer List&idBoard=647d9381559259b8da0ca1c8&key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 263,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an object": true,
+				"Response is not empty": true,
+				"List has ID": true,
+				"List is visible": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an object": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List has ID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"List is visible": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				263
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an object": true,
+					"Response is not empty": true,
+					"List has ID": true,
+					"List is visible": true
+				}
+			]
+		},
+		{
+			"id": "e5b7d9a0-4a64-45a3-967d-b1f69d1fc6eb",
+			"name": "Move All Cards to List",
+			"url": "https://api.trello.com/1/lists/647d938d9cd898db55ca0212/moveAllCards?idBoard=647d9381559259b8da0ca1c8&idList=647d9390a2b21c942d37a4ec&key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 534,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Data in response is an array": true,
+				"Response is not empty": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an array": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				534
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Data in response is an array": true,
+					"Response is not empty": true
+				}
+			]
+		},
+		{
+			"id": "17e23cb1-aaeb-41f0-8361-ad19e2f07307",
+			"name": "Get All Cards",
+			"url": "https://api.trello.com/1/lists/647d9390a2b21c942d37a4ec/cards?key=8b451429c28b1de2677561af8dec68bf&token=ATTAc8c1d4a20926b23783400c24f4fecfc3ab57d246a4ebc2c822c0f8fc33d64d06375ECCA8",
+			"time": 220,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Response is not empty": true,
+				"Data in response is an array": true,
+				"Each Card has moved to new List": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Data in response is an array": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Each Card has moved to new List": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				220
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Response is not empty": true,
+					"Data in response is an array": true,
+					"Each Card has moved to new List": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 17067,
+	"collection": {
+		"requests": [
+			{
+				"id": "724cf887-d816-4590-b2a0-a405470a1f7b",
+				"method": "GET"
+			},
+			{
+				"id": "500f104e-4741-4875-bfc5-45ffdbfdf67b",
+				"method": "POST"
+			},
+			{
+				"id": "bef632ee-14fc-450e-95ba-a786ae940ae8",
+				"method": "GET"
+			},
+			{
+				"id": "8401e1aa-7dd5-4b89-a438-8871ed961818",
+				"method": "GET"
+			},
+			{
+				"id": "53d08f05-fac0-4cae-89b8-288a2f947ac2",
+				"method": "PUT"
+			},
+			{
+				"id": "2ccb2265-4655-479d-afe0-93c5b06a0fe7",
+				"method": "GET"
+			},
+			{
+				"id": "6ee765b2-ae7c-47f5-8f58-c53bab416bc8",
+				"method": "GET"
+			},
+			{
+				"id": "dd8e7f9b-6228-4631-ace4-2ad9d1dc4e2f",
+				"method": "DELETE"
+			},
+			{
+				"id": "855278be-86ba-4f7f-acd6-174537d8ac8c",
+				"method": "GET"
+			},
+			{
+				"id": "04859d61-deb0-47cf-bebf-0d043d5adfa8",
+				"method": "POST"
+			},
+			{
+				"id": "232a87c2-4fb3-4721-a331-9dc266bc5336",
+				"method": "GET"
+			},
+			{
+				"id": "48ef870d-6d3c-410c-88cc-beb25fb60424",
+				"method": "POST"
+			},
+			{
+				"id": "496e53f1-3847-43d1-a8d7-82c41c9668fb",
+				"method": "GET"
+			},
+			{
+				"id": "919fc9b1-96d6-4d19-baad-cb02fd25f13f",
+				"method": "GET"
+			},
+			{
+				"id": "0c7a1abb-89f9-47be-bf3e-7fc618a30bc3",
+				"method": "PUT"
+			},
+			{
+				"id": "37d3b383-4b21-4c00-b8db-901cff2a8565",
+				"method": "GET"
+			},
+			{
+				"id": "8d36b489-dbf5-4b06-b1cd-73274fb86d40",
+				"method": "POST"
+			},
+			{
+				"id": "cd20d8da-aeb6-49cf-a2e2-5cc5fe5fed50",
+				"method": "GET"
+			},
+			{
+				"id": "c6b623ad-7cfd-40a2-a089-ffdcec66a9ff",
+				"method": "PUT"
+			},
+			{
+				"id": "7d549e1a-dcb3-487a-841b-fcdf44be6579",
+				"method": "POST"
+			},
+			{
+				"id": "ba70a00d-a931-4285-b8ac-974fcbda48f1",
+				"method": "GET"
+			},
+			{
+				"id": "56f695c5-d894-4f23-8a25-895964f0d9ac",
+				"method": "POST"
+			},
+			{
+				"id": "c05ad84f-db8b-42a7-83c0-bdd5f312fcba",
+				"method": "GET"
+			},
+			{
+				"id": "3d4a4ff9-fcd4-4ba7-afda-32936cb4908b",
+				"method": "POST"
+			},
+			{
+				"id": "e9b6aefe-3c15-41b3-8b4e-3dd59e784f50",
+				"method": "GET"
+			},
+			{
+				"id": "dec0b216-fa6c-45a7-b5f3-fe4729b5f537",
+				"method": "PUT"
+			},
+			{
+				"id": "8fd053f8-10dd-4145-a274-fbc16f432dd1",
+				"method": "GET"
+			},
+			{
+				"id": "35809d6c-293e-4e31-9ba8-36608e14ea75",
+				"method": "GET"
+			},
+			{
+				"id": "784c6f18-85db-4254-ac29-e2657a15bd92",
+				"method": "PUT"
+			},
+			{
+				"id": "81a85e72-73d8-4583-a66c-55166889c2d9",
+				"method": "GET"
+			},
+			{
+				"id": "a299f7fc-ccba-4925-a99c-060f4449e263",
+				"method": "GET"
+			},
+			{
+				"id": "cebb5424-5ef3-4071-89d7-be6c79bb6493",
+				"method": "PUT"
+			},
+			{
+				"id": "4ed48a87-bea8-4bf6-b3bb-653bddf4492a",
+				"method": "GET"
+			},
+			{
+				"id": "13b70bff-243e-4bfc-9a3e-37af57a301d3",
+				"method": "GET"
+			},
+			{
+				"id": "8a33ce7a-ce71-4778-a59a-4447830bbbd0",
+				"method": "POST"
+			},
+			{
+				"id": "c727e188-2af1-4da6-8618-8018ae850f39",
+				"method": "PUT"
+			},
+			{
+				"id": "ad2fdd90-1274-45a9-8a47-5ff1d0ae285a",
+				"method": "POST"
+			},
+			{
+				"id": "de8c79ba-9cb6-4093-9cc9-fc8a560289bd",
+				"method": "PUT"
+			},
+			{
+				"id": "9107bbd3-38ab-4c02-86f2-33b6a5e71a02",
+				"method": "POST"
+			},
+			{
+				"id": "83017700-59f8-4990-8e12-880d91ccc7dc",
+				"method": "GET"
+			},
+			{
+				"id": "8128ef12-e8b2-4ce7-8055-5a7d4e99e607",
+				"method": "POST"
+			},
+			{
+				"id": "b019d13f-1ccd-4b66-869c-6c4bd58d1c86",
+				"method": "PUT"
+			},
+			{
+				"id": "0997cb68-cf96-45e7-9206-e49be92559bb",
+				"method": "POST"
+			},
+			{
+				"id": "b9fbe909-7a16-4604-b5a2-89bf6cdf5da1",
+				"method": "PUT"
+			},
+			{
+				"id": "c72e375f-873e-410a-8812-4383b859570f",
+				"method": "POST"
+			},
+			{
+				"id": "e5b7d9a0-4a64-45a3-967d-b1f69d1fc6eb",
+				"method": "POST"
+			},
+			{
+				"id": "17e23cb1-aaeb-41f0-8361-ad19e2f07307",
+				"method": "GET"
+			}
+		]
+	}
+}

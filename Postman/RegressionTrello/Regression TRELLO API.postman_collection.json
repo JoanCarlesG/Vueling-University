@@ -1,0 +1,3795 @@
+{
+	"info": {
+		"_postman_id": "f4653c2d-6baf-46d8-b5d5-ad3ba1422518",
+		"name": "Regression TRELLO API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27570617"
+	},
+	"item": [
+		{
+			"name": "Test Cases",
+			"item": [
+				{
+					"name": "TC01 Create a Board",
+					"item": [
+						{
+							"name": "Get All Boards",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsArray(pm, response);\r",
+											"\r",
+											"responseIsEmpty(pm, response);\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/members/me/boards?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"members",
+										"me",
+										"boards"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a Board",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"boardName\", \"Test Board Name\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.environment.set(\"idBoard\", response.id);\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Board has ID\", () => {\r",
+											"    pm.expect(response.id).to.exist;\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/boards/?name={{boardName}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										""
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "{{boardName}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get 1 Board",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Board is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idBoard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Board is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/boards/{{idBoard}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{idBoard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TC02 Rename a Board",
+					"item": [
+						{
+							"name": "Get 1 Board",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"const oldBoardName = pm.response.name;\r",
+											"pm.environment.set(\"oldBoardName\", oldBoardName);\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Board is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idBoard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Board is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Board has name\", () => {\r",
+											"    pm.expect(response.name).to.not.be.empty;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/boards/{{idBoard}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{idBoard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Board's Name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"newBoardName\", \"New Name\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Board is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idBoard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Board has updated name\", () => {\r",
+											"    pm.expect(response.name).to.equal(pm.environment.get(\"newBoardName\"));\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/boards/{{idBoard}}?key={{key}}&token={{token}}&name={{newBoardName}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{idBoard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										},
+										{
+											"key": "name",
+											"value": "{{newBoardName}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get 1 Board",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Board is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idBoard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Board name is different\", () => {\r",
+											"    pm.expect(response.name).to.not.be.equal(pm.environment.get(\"oldBoardName\"));\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/boards/{{idBoard}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{idBoard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TC03 Delete a Board",
+					"item": [
+						{
+							"name": "Get 1 Board",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Board is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idBoard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Board exists\", () => {\r",
+											"    pm.expect(response).to.exist;\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/boards/{{idBoard}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{idBoard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Board",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"const oldBoardName = pm.response.name;\r",
+											"pm.environment.set(\"oldBoardName\", oldBoardName);\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"pm.test(\"Board is deleted\", () => {\r",
+											"    pm.expect(response.id).not.to.exist;\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/boards/{{idBoard}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{idBoard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get 1 Board",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"validate404(pm);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/boards/{{idBoard}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{idBoard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TC04 Create a List",
+					"item": [
+						{
+							"name": "Create a Board",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"boardName\", \"Test Board Name\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.environment.set(\"idBoard\", response.id);\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Board has ID\", () => {\r",
+											"    pm.expect(response.id).to.exist;\r",
+											"})\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/boards/?name={{boardName}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										""
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "{{boardName}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get 1 Board",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Board is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idBoard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Board is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/boards/{{idBoard}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{idBoard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create List",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"listName\", \"Test List Name\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.environment.set(\"idList\", response.id);\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"List has ID\", () => {\r",
+											"    pm.expect(response.id).to.exist;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/1/lists?name={{listName}}&idBoard={{idBoard}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "{{listName}}"
+										},
+										{
+											"key": "idBoard",
+											"value": "{{idBoard}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get 1 List",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found List is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idList\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"List is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/lists/{{idList}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists",
+										"{{idList}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TC05 Rename a List",
+					"item": [
+						{
+							"name": "Get 1 List",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"const oldListName = pm.response.name;\r",
+											"pm.environment.set(\"oldListName\", oldListName);\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found List is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idList\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"List is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})\r",
+											"\r",
+											"pm.test(\"List has name\", () => {\r",
+											"    pm.expect(response.name).to.not.be.empty;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/lists/{{idList}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists",
+										"{{idList}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update List's Name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"listName\", \"New List Name\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found List is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idList\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"List has updated name\", () => {\r",
+											"    pm.expect(response.name).to.equal(pm.environment.get(\"listName\"));\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/lists/{{idList}}?key={{key}}&token={{token}}&name={{listName}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists",
+										"{{idList}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										},
+										{
+											"key": "name",
+											"value": "{{listName}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get 1 List",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found List is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idList\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"List name is different\", () => {\r",
+											"    pm.expect(response.name).to.not.be.equal(pm.environment.get(\"oldListName\"));\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/lists/{{idList}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists",
+										"{{idList}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TC06 Archive a List",
+					"item": [
+						{
+							"name": "Create List",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"listName\", \"Test List Name\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.environment.set(\"idList\", response.id);\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"List has ID\", () => {\r",
+											"    pm.expect(response.id).to.exist;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/1/lists?name={{listName}}&idBoard={{idBoard}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "{{listName}}"
+										},
+										{
+											"key": "idBoard",
+											"value": "{{idBoard}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get 1 List",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found List is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idList\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"List is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/lists/{{idList}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists",
+										"{{idList}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Archive List",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found List is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idList\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"List is NOT visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.true;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/lists/{{idList}}/closed?key={{key}}&token={{token}}&value=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists",
+										"{{idList}}",
+										"closed"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										},
+										{
+											"key": "value",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TC07 Create a Card",
+					"item": [
+						{
+							"name": "Create List",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"listName\", \"Test List Name\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.environment.set(\"idList\", response.id);\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"List has ID\", () => {\r",
+											"    pm.expect(response.id).to.exist;\r",
+											"})\r",
+											"\r",
+											"pm.test(\"List is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/1/lists?name={{listName}}&idBoard={{idBoard}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "{{listName}}"
+										},
+										{
+											"key": "idBoard",
+											"value": "{{idBoard}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get 1 List",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found List is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idList\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"List is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/lists/{{idList}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists",
+										"{{idList}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Card",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.environment.set(\"idCard\", response.id);\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Card has ID\", () => {\r",
+											"    pm.expect(response.id).to.exist;\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/cards?idList={{idList}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards"
+									],
+									"query": [
+										{
+											"key": "idList",
+											"value": "{{idList}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get 1 Card",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Card is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idCard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/cards/{{idCard}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{idCard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TC08 Rename a Card",
+					"item": [
+						{
+							"name": "Create Card",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.environment.set(\"idCard\", response.id);\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Card has ID\", () => {\r",
+											"    pm.expect(response.id).to.exist;\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/cards?idList={{idList}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards"
+									],
+									"query": [
+										{
+											"key": "idList",
+											"value": "{{idList}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get 1 Card",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"const oldCardName = pm.response.name;\r",
+											"pm.environment.set(\"oldCardName\", oldCardName);\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Card is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idCard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/cards/{{idCard}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{idCard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Card's Name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//Change card Name\r",
+											"pm.environment.set(\"cardName\", \"Test Card Name\");\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Card is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idCard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card has updated name\", () => {\r",
+											"    pm.expect(response.name).to.equal(pm.environment.get(\"cardName\"));\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/1/cards/{{idCard}}?key={{key}}&token={{token}}&name={{cardName}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{idCard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										},
+										{
+											"key": "name",
+											"value": "{{cardName}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get 1 Card",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Card is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idCard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card name is different\", () => {\r",
+											"    pm.expect(response.name).to.not.be.equal(pm.environment.get(\"oldCardName\"));\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/cards/{{idCard}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{idCard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TC09 Edit Desc from a Card",
+					"item": [
+						{
+							"name": "Get 1 Card",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"const oldCardDesc = pm.response.desc;\r",
+											"pm.environment.set(\"oldCardDesc\", oldCardDesc);\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Card is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idCard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/cards/{{idCard}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{idCard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Card's Desc",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//Change card Description\r",
+											"pm.environment.set(\"cardDescription\", \"Test Card Description\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Card is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idCard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card has updated description\", () => {\r",
+											"    pm.expect(response.desc).to.equal(pm.environment.get(\"cardDescription\"));\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/1/cards/{{idCard}}?key={{key}}&token={{token}}&desc={{cardDescription}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{idCard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										},
+										{
+											"key": "desc",
+											"value": "{{cardDescription}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get 1 Card",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Card is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idCard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card description is different\", () => {\r",
+											"    pm.expect(response.desc).to.not.be.equal(pm.environment.get(\"oldCardDesc\"));\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/cards/{{idCard}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{idCard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TC10 Change Card Cover",
+					"item": [
+						{
+							"name": "Get 1 Card",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Card is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idCard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card color is Null\", () => {\r",
+											"    pm.expect(response.cover.color).to.be.null;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/cards/{{idCard}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{idCard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Card's Cover Color",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//Change card Cover Color --> body (JSON)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Card is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idCard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card has updated color\", () => {\r",
+											"    pm.expect(response.cover.color).to.equal(\"blue\");\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cover\":\r\n        {\"color\": \"blue\"}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/1/cards/{{idCard}}?key={{key}}&token={{token}}&name={{cardName}}&desc={{cardDescription}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{idCard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										},
+										{
+											"key": "name",
+											"value": "{{cardName}}"
+										},
+										{
+											"key": "desc",
+											"value": "{{cardDescription}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get 1 Card",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Card is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idCard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card color is different\", () => {\r",
+											"    pm.expect(response.cover.color).to.not.be.null;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/cards/{{idCard}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{idCard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TC11 Move Card to other List",
+					"item": [
+						{
+							"name": "Get 1 List",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"List is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/lists/{{idList}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists",
+										"{{idList}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Card",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.environment.set(\"idCard\", response.id);\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Card has ID\", () => {\r",
+											"    pm.expect(response.id).to.exist;\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/cards?idList={{idList}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards"
+									],
+									"query": [
+										{
+											"key": "idList",
+											"value": "{{idList}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Card",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//Change card Name\r",
+											"pm.environment.set(\"cardName\", \"Test Card Name\");\r",
+											"//Change card Description\r",
+											"pm.environment.set(\"cardDescription\", \"Test Card Description\");\r",
+											"//Change card Cover Color --> body (JSON)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Card is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idCard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card has updated name\", () => {\r",
+											"    pm.expect(response.name).to.equal(pm.environment.get(\"cardName\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card has updated description\", () => {\r",
+											"    pm.expect(response.desc).to.equal(pm.environment.get(\"cardDescription\"));\r",
+											"})\r",
+											"pm.test(\"Card has updated color\", () => {\r",
+											"    pm.expect(response.cover.color).to.not.be.null;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cover\":\r\n        {\"color\": \"red\"}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/1/cards/{{idCard}}?key={{key}}&token={{token}}&name={{cardName}}&desc={{cardDescription}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{idCard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										},
+										{
+											"key": "name",
+											"value": "{{cardName}}"
+										},
+										{
+											"key": "desc",
+											"value": "{{cardDescription}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Other List",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"listName\", \"Transfer List Name\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.environment.set(\"idNewList\", response.id);\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"List has ID\", () => {\r",
+											"    pm.expect(response.id).to.exist;\r",
+											"})\r",
+											"\r",
+											"pm.test(\"List is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/1/lists?name={{listName}}&idBoard={{idBoard}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "{{listName}}"
+										},
+										{
+											"key": "idBoard",
+											"value": "{{idBoard}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Move 1 Card to List",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Card is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idCard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card has moved to new List\", () => {\r",
+											"    pm.expect(response.idList).to.be.equal(pm.environment.get(\"idNewList\"));\r",
+											"\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/cards/{{idCard}}?idList={{idNewList}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{idCard}}"
+									],
+									"query": [
+										{
+											"key": "idList",
+											"value": "{{idNewList}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TC12 Move All Cards to other List",
+					"item": [
+						{
+							"name": "Create List",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"listName\", \"Multiple Cards List Name\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.environment.set(\"idList\", response.id);\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"List has ID\", () => {\r",
+											"    pm.expect(response.id).to.exist;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/1/lists?name={{listName}}&idBoard={{idBoard}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "{{listName}}"
+										},
+										{
+											"key": "idBoard",
+											"value": "{{idBoard}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get 1 List",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"List is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/lists/{{idList}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists",
+										"{{idList}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Card 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.environment.set(\"idCard\", response.id);\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Card has ID\", () => {\r",
+											"    pm.expect(response.id).to.exist;\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/cards?idList={{idList}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards"
+									],
+									"query": [
+										{
+											"key": "idList",
+											"value": "{{idList}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Card 1",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//Change card Name\r",
+											"pm.environment.set(\"cardName\", \"Test Card Name\");\r",
+											"//Change card Description\r",
+											"pm.environment.set(\"cardDescription\", \"Test Card Description\");\r",
+											"//Change card Cover Color --> body (JSON)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Card is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idCard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card has updated name\", () => {\r",
+											"    pm.expect(response.name).to.equal(pm.environment.get(\"cardName\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card has updated description\", () => {\r",
+											"    pm.expect(response.desc).to.equal(pm.environment.get(\"cardDescription\"));\r",
+											"})\r",
+											"pm.test(\"Card has updated color\", () => {\r",
+											"    pm.expect(response.cover.color).to.not.be.null;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cover\":\r\n        {\"color\": \"red\"}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/1/cards/{{idCard}}?key={{key}}&token={{token}}&name={{cardName}}&desc={{cardDescription}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{idCard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										},
+										{
+											"key": "name",
+											"value": "{{cardName}}"
+										},
+										{
+											"key": "desc",
+											"value": "{{cardDescription}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Card 2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.environment.set(\"idCard\", response.id);\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Card has ID\", () => {\r",
+											"    pm.expect(response.id).to.exist;\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/cards?idList={{idList}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards"
+									],
+									"query": [
+										{
+											"key": "idList",
+											"value": "{{idList}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Card 2",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//Change card Name\r",
+											"pm.environment.set(\"cardName\", \"Test Card Name\");\r",
+											"//Change card Description\r",
+											"pm.environment.set(\"cardDescription\", \"Test Card Description\");\r",
+											"//Change card Cover Color --> body (JSON)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"Found Card is the right one\", () => {\r",
+											"    pm.expect(response.id).to.equal(pm.environment.get(\"idCard\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card has updated name\", () => {\r",
+											"    pm.expect(response.name).to.equal(pm.environment.get(\"cardName\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Card has updated description\", () => {\r",
+											"    pm.expect(response.desc).to.equal(pm.environment.get(\"cardDescription\"));\r",
+											"})\r",
+											"pm.test(\"Card has updated color\", () => {\r",
+											"    pm.expect(response.cover.color).to.not.be.null;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cover\":\r\n        {\"color\": \"lime\"}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/1/cards/{{idCard}}?key={{key}}&token={{token}}&name={{cardName}}&desc={{cardDescription}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{idCard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										},
+										{
+											"key": "name",
+											"value": "{{cardName}}"
+										},
+										{
+											"key": "desc",
+											"value": "{{cardDescription}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Other List",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"listName\", \"Multiple Transfer List\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.environment.set(\"idNewList\", response.id);\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsObject(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"pm.test(\"List has ID\", () => {\r",
+											"    pm.expect(response.id).to.exist;\r",
+											"})\r",
+											"\r",
+											"pm.test(\"List is visible\", () => {\r",
+											"    pm.expect(response.closed).to.be.false;\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/1/lists?name={{listName}}&idBoard={{idBoard}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "{{listName}}"
+										},
+										{
+											"key": "idBoard",
+											"value": "{{idBoard}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Move All Cards to List",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"dataIsArray(pm, response);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/lists/{{idList}}/moveAllCards?idBoard={{idBoard}}&idList={{idNewList}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists",
+										"{{idList}}",
+										"moveAllCards"
+									],
+									"query": [
+										{
+											"key": "idBoard",
+											"value": "{{idBoard}}"
+										},
+										{
+											"key": "idList",
+											"value": "{{idNewList}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Cards",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"\r",
+											"validateOK200(pm);\r",
+											"\r",
+											"responseIsNotEmpty(pm, response);\r",
+											"\r",
+											"dataIsArray(pm, response);\r",
+											"\r",
+											"pm.test(\"Each Card has moved to new List\", function () {\r",
+											"    for(i = 0; i < response.length; i++){\r",
+											"        let cardListId = response[i].idList;\r",
+											"        pm.expect(cardListId).to.be.equal(pm.environment.get(\"idNewList\"));\r",
+											"    }\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/lists/{{idNewList}}/cards?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists",
+										"{{idNewList}}",
+										"cards"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Requests",
+			"item": [
+				{
+					"name": "Boards",
+					"item": [
+						{
+							"name": "Get 1 Board",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/boards/{{idBoard}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{idBoard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Boards",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.environment.set(\"idBoard\", response[0].id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/members/me/boards?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"members",
+										"me",
+										"boards"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a Board",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"boardName\", \"Test Board Name\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.environment.set(\"idBoard\", response.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/boards/?name={{boardName}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										""
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "{{boardName}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Board's Name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"newBoardName\", \"New Name\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/boards/{{idBoard}}?key={{key}}&token={{token}}&name={{newBoardName}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{idBoard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										},
+										{
+											"key": "name",
+											"value": "{{newBoardName}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Board",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/boards/{{idBoard}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{idBoard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Lists",
+					"item": [
+						{
+							"name": "Create List",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"listName\", \"Test List Name\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.environment.set(\"idList\", response.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/1/lists?name={{listName}}&idBoard={{idBoard}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "{{listName}}"
+										},
+										{
+											"key": "idBoard",
+											"value": "{{idBoard}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get 1 List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/lists/{{idList}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists",
+										"{{idList}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Lists",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/boards/{{idBoard}}/lists?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"boards",
+										"{{idBoard}}",
+										"lists"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update List's Name",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"listName\", \"New List Name\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/lists/{{idList}}?key={{key}}&token={{token}}&name={{listName}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists",
+										"{{idList}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										},
+										{
+											"key": "name",
+											"value": "{{listName}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Archive List",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"listName\", \"New List Name\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/lists/{{idList}}/closed?key={{key}}&token={{token}}&value=true",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists",
+										"{{idList}}",
+										"closed"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										},
+										{
+											"key": "value",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cards",
+					"item": [
+						{
+							"name": "Create Card",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = pm.response.json();\r",
+											"pm.environment.set(\"idCard\", response.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/cards?idList={{idList}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards"
+									],
+									"query": [
+										{
+											"key": "idList",
+											"value": "{{idList}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get 1 Card",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/cards/{{idCard}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{idCard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Card",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"//Change card Name\r",
+											"pm.environment.set(\"cardName\", \"Test Card Name\");\r",
+											"//Change card Description\r",
+											"pm.environment.set(\"cardDescription\", \"Test Card Description\");\r",
+											"//Change card Cover Color --> body (JSON)\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cover\":\r\n        {\"color\": \"blue\"}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/1/cards/{{idCard}}?key={{key}}&token={{token}}&name={{cardName}}&desc={{cardDescription}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{idCard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										},
+										{
+											"key": "name",
+											"value": "{{cardName}}"
+										},
+										{
+											"key": "desc",
+											"value": "{{cardDescription}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Card",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/cards/{{idCard}}?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{idCard}}"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Move 1 Card to List",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/cards/{{idCard}}?idList={{idNewList}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"cards",
+										"{{idCard}}"
+									],
+									"query": [
+										{
+											"key": "idList",
+											"value": "{{idNewList}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Move All Cards to List",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"\r",
+											"pm.environment.set(\"idNewList\", idNewList);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{token}}/1/lists/{{idList}}/moveAllCards?idBoard={{idBoard}}&idList={{idNewList}}&key={{key}}&token={{token}}",
+									"host": [
+										"{{token}}"
+									],
+									"path": [
+										"1",
+										"lists",
+										"{{idList}}",
+										"moveAllCards"
+									],
+									"query": [
+										{
+											"key": "idBoard",
+											"value": "{{idBoard}}"
+										},
+										{
+											"key": "idList",
+											"value": "{{idNewList}}"
+										},
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Cards",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/1/lists/{{idList}}/cards?key={{key}}&token={{token}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"1",
+										"lists",
+										"{{idList}}",
+										"cards"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{key}}"
+										},
+										{
+											"key": "token",
+											"value": "{{token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"validateOK200 = function (pm) {",
+					"    pm.test(\"Status code is 200\", function () {",
+					"        pm.response.to.have.status(200); ",
+					"    }); ",
+					"}",
+					"validate404 = function (pm) {",
+					"    pm.test(\"Status code is 404\", function () {",
+					"        pm.response.to.have.status(404); ",
+					"    }); ",
+					"}",
+					"dataIsArray = function (pm, response) {",
+					"    pm.test(\"Data in response is an array\", function () {",
+					"        pm.expect(response).to.be.an(\"Array\");",
+					"    }); ",
+					"}",
+					"dataIsObject = function (pm, response) {",
+					"    pm.test(\"Data in response is an object\", function () {",
+					"        pm.expect(response).to.be.an(\"Object\");",
+					"    }); ",
+					"}",
+					"responseIsEmpty = function (pm, response) {",
+					"    pm.test(\"Response is empty\", () => {",
+					"        pm.expect(response).to.be.empty;",
+					"    });",
+					"}",
+					"responseIsNotEmpty = function (pm, response) {",
+					"    pm.test(\"Response is not empty\", () => {",
+					"        pm.expect(response).to.not.be.empty;",
+					"    });",
+					"}",
+					"",
+					""
+				]
+			}
+		}
+	]
+}
