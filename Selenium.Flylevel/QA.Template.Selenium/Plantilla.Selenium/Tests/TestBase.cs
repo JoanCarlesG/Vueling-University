@@ -59,6 +59,9 @@ namespace Flylevel.Tests
     {
         #region Definitions
         protected HomePage homePage;
+        protected TicketsPage ticketsPage;
+        protected RegisterPage registerPage;
+        protected ChooseFlightPage chooseFlightPage;
         protected Page page;
         protected ISetUpWebDriver setUpWebDriver;
         protected ObjectsTest objectsTest;

@@ -1,0 +1,6 @@
+{
+  "baseUrl": "https://www.google.es/",
+  "env": {
+    "timeOutPersonalizado": "3000"
+  }
+}

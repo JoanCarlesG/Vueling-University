@@ -92,5 +92,13 @@ namespace Flylevel.Common
             int randomPhoneNumber = random.Next(10000000, 99999999);
             return randomPhoneNumber;
         }
+
+        public static string GetTodayDay()
+        {
+            DateTime currentDateTime = DateTime.Now;
+            string formattedDateTime = currentDateTime.ToString("dd");
+            
+            return formattedDateTime;
+        }
     }
 }

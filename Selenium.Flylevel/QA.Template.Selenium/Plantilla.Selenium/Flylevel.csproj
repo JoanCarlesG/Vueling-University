@@ -145,10 +145,14 @@
     <Compile Include="Test.Config\ObjectsTest.cs" />
     <Compile Include="Test.Data\Loaders\LoadScenarioTestCasesConfiguration.cs" />
     <Compile Include="Test.Data\Resources\Models\ScenarioTestCases.cs" />
+    <Compile Include="Tests\VuelingTests.cs" />
     <Compile Include="Tests\FlightsTests.cs" />
     <Compile Include="Tests\TestBase.cs" />
     <Compile Include="WebPages.Base\CommonPage.cs" />
     <Compile Include="WebPages.Base\Page.cs" />
+    <Compile Include="WebPages\ChooseFlightPage.cs" />
+    <Compile Include="WebPages\RegisterPage.cs" />
+    <Compile Include="WebPages\TicketsPage.cs" />
     <Compile Include="WebPages\HomePage.cs" />
   </ItemGroup>
   <ItemGroup>
